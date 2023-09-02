@@ -17,7 +17,6 @@ public class VentanaEjercicio1 extends JFrame{
 	public VentanaEjercicio1() {
 		setTitle("Contactos");
 		setBounds(50,400,500,300);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 		
 		JLabel lblNombre = new JLabel("Nombre");
