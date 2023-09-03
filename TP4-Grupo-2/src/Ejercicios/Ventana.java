@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class Ventana extends JFrame{
 
@@ -16,20 +17,24 @@ public class Ventana extends JFrame{
 	private JLabel labelGrupo;
 	
 	public Ventana() {
+		
 		setBounds(50,50,500,300);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLayout(null);
+		setTitle("TP 4 - Grupo 2");
+		getContentPane().setLayout(null);
 		
 		buttonEj1 = new JButton();
 		buttonEj1.setText("Ejercicio 1");
 		buttonEj1.setBounds(180,80,140,30);
 		buttonEj1.addActionListener(new EventoButton(1));
 		getContentPane().add(buttonEj1);
+		
 		buttonEj2 = new JButton();
 		buttonEj2.setText("Ejercicio 2");
 		buttonEj2.setBounds(180,120,140,30);
 		buttonEj2.addActionListener(new EventoButton(2));
 		getContentPane().add(buttonEj2);
+		
 		buttonEj3 = new JButton();
 		buttonEj3.setText("Ejercicio 3");
 		buttonEj3.setBounds(180,160,140,30);

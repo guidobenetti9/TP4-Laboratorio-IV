@@ -1,22 +1,27 @@
 package Ejercicios;
 
 import javax.swing.JFrame;
-import java.awt.BorderLayout;
+import java.awt.Color;
+
 import javax.swing.JLabel;
-import javax.swing.BoxLayout;
 import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class VentanaEjercicio1 extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField txtNombre;
+	private JTextField txtApellido;
+	private JTextField txtTelefono;
+	private JTextField txtFechaNac;
+	private JLabel lblInformacion;
 
 	public VentanaEjercicio1() {
 		setTitle("Contactos");
-		setBounds(50,400,500,300);
+		setBounds(50,400,505,337);
 		getContentPane().setLayout(null);
 		
 		JLabel lblNombre = new JLabel("Nombre");
@@ -28,35 +33,117 @@ public class VentanaEjercicio1 extends JFrame{
 		getContentPane().add(lblApellido);
 		
 		JLabel lblTelefono = new JLabel("Telefono");
-		lblTelefono.setBounds(54, 120, 46, 14);
+		lblTelefono.setBounds(54, 120, 60, 14);
 		getContentPane().add(lblTelefono);
 		
 		JLabel lblFechaDeNacimiento = new JLabel("Fecha Nac.");
 		lblFechaDeNacimiento.setBounds(54, 146, 89, 14);
 		getContentPane().add(lblFechaDeNacimiento);
 		
-		textField = new JTextField();
-		textField.setBounds(169, 67, 195, 20);
-		getContentPane().add(textField);
-		textField.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(169, 92, 195, 20);
-		getContentPane().add(textField_1);
+		txtNombre = new JTextField();
+		txtNombre.setBounds(169, 67, 195, 20);
+		getContentPane().add(txtNombre);
+		txtNombre.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(169, 117, 195, 20);
-		getContentPane().add(textField_2);
+		txtApellido = new JTextField();
+		txtApellido.setBounds(169, 92, 195, 20);
+		txtApellido.setColumns(10);
+		getContentPane().add(txtApellido);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(169, 143, 195, 20);
-		getContentPane().add(textField_3);
+		txtTelefono = new JTextField();
+		txtTelefono.setBounds(169, 117, 195, 20);
+		txtTelefono.setColumns(10);
+		getContentPane().add(txtTelefono);
+		
+		txtFechaNac = new JTextField();
+		txtFechaNac.setBounds(169, 143, 195, 20);
+		txtFechaNac.setColumns(10);
+		getContentPane().add(txtFechaNac);
+		
+		JLabel lblTextoDatos = new JLabel("Los datos ingresados fueron: ");
+		lblTextoDatos.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblTextoDatos.setBounds(10, 234, 168, 14);
+		getContentPane().add(lblTextoDatos);
+	
+		
+		JLabel lblInformacion = new JLabel("");
+		lblInformacion.setBounds(188, 234, 291, 53);
+		getContentPane().add(lblInformacion);
+		
+		JButton btnMostrar = new JButton("Mostrar");
+		btnMostrar.setBounds(275, 189, 89, 23);
+		getContentPane().add(btnMostrar);
+		btnMostrar.addActionListener(new EventoButtonMostrar(txtNombre, txtApellido, txtTelefono, txtFechaNac, lblInformacion));
 	}
 	
 	public void cambiarVisibilidad(Boolean estado) { 
 		setVisible(estado);
 	}
+
+
+class EventoButtonMostrar implements ActionListener{
+		
+	
+private JTextField txtNombre;
+private JTextField txtApellido;
+private JTextField txtTelefono;
+private JTextField txtFechaNac;
+private JLabel lblInformacion;
+
+
+public EventoButtonMostrar() {};
+
+public EventoButtonMostrar (JTextField txtN, JTextField txtA, JTextField txtT, JTextField txtFN, JLabel lblInfo) {
+	
+			txtNombre = txtN;
+			txtApellido = txtA;
+			txtTelefono = txtT;
+			txtFechaNac = txtFN;
+			lblInformacion = lblInfo;
+			
+			
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+		Color colorRojo = Color.RED;
+		Color colorBlanco = Color.WHITE;
+			
+		if(txtNombre.getText().isEmpty()) {
+			
+			txtNombre.setBackground(colorRojo);
+			lblInformacion.setText("");
+			
+		}
+		
+		//VALIDAR LOS DEMÁS TXT
+		
+		else {
+			
+			//PONER FONDO BLANCO Y LIMPIAR LOS TXT
+			txtNombre.setBackground(colorBlanco);
+			
+			
+			
+			lblInformacion.setText(txtNombre.getText() + "  " + txtApellido.getText()  + "  "  + txtTelefono.getText()  + "  " +  txtFechaNac.getText());
+			lblInformacion.setVisible(true);	
+			txtNombre.setText("");
+		}
+			
+		
+			
+		}
+		
+		public JLabel getLblInformacion() {
+			return lblInformacion;
+		}
+
+		public void setLblInformacion(JLabel lblInformacion) {
+			this.lblInformacion = lblInformacion;
+		}
+
 }
+}
+
