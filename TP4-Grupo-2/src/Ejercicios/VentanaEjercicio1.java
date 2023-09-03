@@ -117,6 +117,12 @@ public EventoButtonMostrar (JTextField txtN, JTextField txtA, JTextField txtT, J
 			lblInformacion.setText("");
 			
 		}
+		if (txtApellido.getText().isEmpty()) {
+			
+			txtApellido.setBackground(colorRojo);
+			lblInformacion.setText("");
+			
+		}
 		
 		//VALIDAR LOS DEMÁS TXT
 		
@@ -124,12 +130,14 @@ public EventoButtonMostrar (JTextField txtN, JTextField txtA, JTextField txtT, J
 			
 			//PONER FONDO BLANCO Y LIMPIAR LOS TXT
 			txtNombre.setBackground(colorBlanco);
+			txtApellido.setBackground(colorBlanco);
 			
 			
 			
 			lblInformacion.setText(txtNombre.getText() + "  " + txtApellido.getText()  + "  "  + txtTelefono.getText()  + "  " +  txtFechaNac.getText());
 			lblInformacion.setVisible(true);	
 			txtNombre.setText("");
+			txtApellido.setText("");
 		}
 			
 		
