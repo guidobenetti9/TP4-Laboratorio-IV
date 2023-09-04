@@ -111,33 +111,51 @@ public EventoButtonMostrar (JTextField txtN, JTextField txtA, JTextField txtT, J
 		Color colorRojo = Color.RED;
 		Color colorBlanco = Color.WHITE;
 			
-		if(txtNombre.getText().isEmpty()) {
+		if(txtNombre.getText().isEmpty() || txtApellido.getText().isEmpty() || txtTelefono.getText().isEmpty() || txtFechaNac.getText().isEmpty()) {
 			
-			txtNombre.setBackground(colorRojo);
+			if(txtNombre.getText().isEmpty()) {
+			txtNombre.setBackground(colorRojo);}
+			else {
+				txtNombre.setBackground(colorBlanco);
+			}
+			
+			if(txtApellido.getText().isEmpty()) {
+			txtApellido.setBackground(colorRojo);}
+			else {
+				txtApellido.setBackground(colorBlanco);
+			}
+			
+			if(txtTelefono.getText().isEmpty()) {
+			txtTelefono.setBackground(colorRojo);}
+			else {
+				txtTelefono.setBackground(colorBlanco);
+			}
+			
+			if(txtFechaNac.getText().isEmpty()){
+			txtFechaNac.setBackground(colorRojo);}
+			else {
+				txtFechaNac.setBackground(colorBlanco);
+			}
+
 			lblInformacion.setText("");
 			
 		}
-		if (txtApellido.getText().isEmpty()) {
-			
-			txtApellido.setBackground(colorRojo);
-			lblInformacion.setText("");
-			
-		}
-		
-		//VALIDAR LOS DEMÁS TXT
 		
 		else {
 			
 			//PONER FONDO BLANCO Y LIMPIAR LOS TXT
 			txtNombre.setBackground(colorBlanco);
 			txtApellido.setBackground(colorBlanco);
-			
+			txtTelefono.setBackground(colorBlanco);
+			txtFechaNac.setBackground(colorBlanco);
 			
 			
 			lblInformacion.setText(txtNombre.getText() + "  " + txtApellido.getText()  + "  "  + txtTelefono.getText()  + "  " +  txtFechaNac.getText());
 			lblInformacion.setVisible(true);	
 			txtNombre.setText("");
 			txtApellido.setText("");
+			txtTelefono.setText("");
+			txtFechaNac.setText("");
 		}
 			
 		
