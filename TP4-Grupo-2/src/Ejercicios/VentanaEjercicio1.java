@@ -17,7 +17,7 @@ public class VentanaEjercicio1 extends JFrame{
 	private JTextField txtApellido;
 	private JTextField txtTelefono;
 	private JTextField txtFechaNac;
-	private JLabel lblInformacion;
+	//private JLabel lblInformacion;
 
 	public VentanaEjercicio1() {
 		setTitle("Contactos");
