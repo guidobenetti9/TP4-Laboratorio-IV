@@ -6,5 +6,6 @@ public class Principal {
 		
 		Ventana ventana = new Ventana();
 		ventana.cambiarVisibilidad(true);
+		
 	}
 }

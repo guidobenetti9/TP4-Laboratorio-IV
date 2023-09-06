@@ -1,7 +1,6 @@
 package Ejercicios;
 
 import javax.swing.JFrame;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -9,7 +8,6 @@ import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
@@ -21,7 +19,6 @@ public class VentanaEjercicio2 extends JFrame{
 	private JTextField txtNota1;
 	private JTextField txtNota2;
 	private JTextField txtNota3;
-	private JLabel lblNota_2;
 	private JTextField txtPromedio;
 	private JTextField txtCondicion;
 
@@ -118,7 +115,7 @@ public class VentanaEjercicio2 extends JFrame{
 		JButton btnCalcular = new JButton("CALCULAR");
 		btnCalcular.setBounds(329, 58, 117, 41);
 		getContentPane().add(btnCalcular);
-		btnCalcular.addActionListener(new EventoButtonCalcular(txtNota1, txtNota2, txtNota3, cbTPS, txtCondicion, txtCondicion));
+		btnCalcular.addActionListener(new EventoButtonCalcular(txtNota1, txtNota2, txtNota3, cbTPS, txtPromedio, txtCondicion));
 	}
 	
 	public void cambiarVisibilidad(Boolean estado) { 
@@ -128,49 +125,44 @@ public class VentanaEjercicio2 extends JFrame{
 
 class EventoButtonCalcular implements ActionListener{
 
-private JTextField txtNota1;
-private JTextField txtNota2;
-private JTextField txtNota3;
-private JComboBox<String> cbTPS;
-private JTextField txtPromedio;
-private JTextField txtCondicion;
-
-
-EventoButtonCalcular() {};
-
-EventoButtonCalcular (JTextField n1, JTextField n2, JTextField n3, JComboBox<String> tp, JTextField prom, JTextField condicion){
+	private JTextField txtNota1;
+	private JTextField txtNota2;
+	private JTextField txtNota3;
+	private JComboBox<String> cbTPS;
+	private JTextField txtPromedio;
+	private JTextField txtCondicion;
 	
-	txtNota1 = n1;
-	txtNota2 = n2;
-	txtNota3 = n3;
-	cbTPS = tp;
-	txtPromedio = prom;
-	txtCondicion = condicion;
-	
+	EventoButtonCalcular() {};
 
-}
+	EventoButtonCalcular (JTextField n1, JTextField n2, JTextField n3, JComboBox<String> tp, JTextField prom, JTextField condicion){
+		txtNota1 = n1;
+		txtNota2 = n2;
+		txtNota3 = n3;
+		cbTPS = tp;
+		txtPromedio = prom;
+		txtCondicion = condicion;
+	}
 	
-	
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		
 		////PRIMER ITEM => SI EL TP ESTÁ DESAPROBADO, EL ALUMNO ESTÁ LIBRE.
-		
 		if(cbTPS.getSelectedIndex() == 1) {
-			
 			txtCondicion.setText("Libre");
 		}
-
-		
+		///CALCULAR EL PROMEDIO:
+		try {
+			float nota1 = Float.parseFloat(txtNota1.getText());
+			float nota2 = Float.parseFloat(txtNota2.getText());
+			float nota3 = Float.parseFloat(txtNota3.getText());
+			float promedio = (nota1 + nota2 + nota3)/3;
+			txtPromedio.setText(Float.toString(promedio));
+		}
+		catch (NumberFormatException enf) {
+			txtPromedio.setText("Error en el formato de numeros");
+			txtPromedio.setBackground(Color.red);
+		}
 	}
-	
-	
-	
-	
-	
-	
 }
 
 

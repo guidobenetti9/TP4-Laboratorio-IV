@@ -2,7 +2,6 @@ package Ejercicios;
 
 import javax.swing.JFrame;
 import java.awt.Color;
-
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -40,7 +39,6 @@ public class VentanaEjercicio1 extends JFrame{
 		lblFechaDeNacimiento.setBounds(54, 146, 89, 14);
 		getContentPane().add(lblFechaDeNacimiento);
 		
-		
 		txtNombre = new JTextField();
 		txtNombre.setBounds(169, 67, 195, 20);
 		getContentPane().add(txtNombre);
@@ -65,7 +63,6 @@ public class VentanaEjercicio1 extends JFrame{
 		lblTextoDatos.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblTextoDatos.setBounds(10, 234, 168, 14);
 		getContentPane().add(lblTextoDatos);
-	
 		
 		JLabel lblInformacion = new JLabel("");
 		lblInformacion.setBounds(188, 234, 291, 53);
@@ -84,82 +81,75 @@ public class VentanaEjercicio1 extends JFrame{
 
 class EventoButtonMostrar implements ActionListener{
 		
+	private JTextField txtNombre;
+	private JTextField txtApellido;
+	private JTextField txtTelefono;
+	private JTextField txtFechaNac;
+	private JLabel lblInformacion;
 	
-private JTextField txtNombre;
-private JTextField txtApellido;
-private JTextField txtTelefono;
-private JTextField txtFechaNac;
-private JLabel lblInformacion;
-
-
-public EventoButtonMostrar() {};
-
-public EventoButtonMostrar (JTextField txtN, JTextField txtA, JTextField txtT, JTextField txtFN, JLabel lblInfo) {
+	public EventoButtonMostrar() {};
 	
+	public EventoButtonMostrar (JTextField txtN, JTextField txtA, JTextField txtT, JTextField txtFN, JLabel lblInfo) {
 			txtNombre = txtN;
 			txtApellido = txtA;
 			txtTelefono = txtT;
 			txtFechaNac = txtFN;
 			lblInformacion = lblInfo;
-			
-			
 		}
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
-		Color colorRojo = Color.RED;
-		Color colorBlanco = Color.WHITE;
-			
-		if(txtNombre.getText().isEmpty() || txtApellido.getText().isEmpty() || txtTelefono.getText().isEmpty() || txtFechaNac.getText().isEmpty()) {
-			
-			if(txtNombre.getText().isEmpty()) {
-			txtNombre.setBackground(colorRojo);}
+			Color colorRojo = Color.RED;
+			Color colorBlanco = Color.WHITE;
+				
+			if(txtNombre.getText().isEmpty() || txtApellido.getText().isEmpty() || txtTelefono.getText().isEmpty() || txtFechaNac.getText().isEmpty()) {
+				
+				if(txtNombre.getText().isEmpty()) {
+					txtNombre.setBackground(colorRojo);
+				}
+				else {
+					txtNombre.setBackground(colorBlanco);
+				}
+				
+				if(txtApellido.getText().isEmpty()) {
+					txtApellido.setBackground(colorRojo);
+				}
+				else {
+					txtApellido.setBackground(colorBlanco);
+				}
+				
+				if(txtTelefono.getText().isEmpty()) {
+					txtTelefono.setBackground(colorRojo);
+				}
+				else {
+					txtTelefono.setBackground(colorBlanco);
+				}
+				
+				if(txtFechaNac.getText().isEmpty()){
+					txtFechaNac.setBackground(colorRojo);
+				}
+				else {
+					txtFechaNac.setBackground(colorBlanco);
+				}
+	
+				lblInformacion.setText("");
+			}
 			else {
+				
+				//PONER FONDO BLANCO Y LIMPIAR LOS TXT
 				txtNombre.setBackground(colorBlanco);
-			}
-			
-			if(txtApellido.getText().isEmpty()) {
-			txtApellido.setBackground(colorRojo);}
-			else {
 				txtApellido.setBackground(colorBlanco);
-			}
-			
-			if(txtTelefono.getText().isEmpty()) {
-			txtTelefono.setBackground(colorRojo);}
-			else {
 				txtTelefono.setBackground(colorBlanco);
-			}
-			
-			if(txtFechaNac.getText().isEmpty()){
-			txtFechaNac.setBackground(colorRojo);}
-			else {
 				txtFechaNac.setBackground(colorBlanco);
+				
+				lblInformacion.setText(txtNombre.getText() + "  " + txtApellido.getText()  + "  "  + txtTelefono.getText()  + "  " +  txtFechaNac.getText());
+				lblInformacion.setVisible(true);	
+				txtNombre.setText("");
+				txtApellido.setText("");
+				txtTelefono.setText("");
+				txtFechaNac.setText("");
 			}
-
-			lblInformacion.setText("");
-			
-		}
-		
-		else {
-			
-			//PONER FONDO BLANCO Y LIMPIAR LOS TXT
-			txtNombre.setBackground(colorBlanco);
-			txtApellido.setBackground(colorBlanco);
-			txtTelefono.setBackground(colorBlanco);
-			txtFechaNac.setBackground(colorBlanco);
-			
-			
-			lblInformacion.setText(txtNombre.getText() + "  " + txtApellido.getText()  + "  "  + txtTelefono.getText()  + "  " +  txtFechaNac.getText());
-			lblInformacion.setVisible(true);	
-			txtNombre.setText("");
-			txtApellido.setText("");
-			txtTelefono.setText("");
-			txtFechaNac.setText("");
-		}
-			
-		
-			
 		}
 		
 		public JLabel getLblInformacion() {
@@ -169,7 +159,6 @@ public EventoButtonMostrar (JTextField txtN, JTextField txtA, JTextField txtT, J
 		public void setLblInformacion(JLabel lblInformacion) {
 			this.lblInformacion = lblInformacion;
 		}
-
-}
+	}
 }
 
