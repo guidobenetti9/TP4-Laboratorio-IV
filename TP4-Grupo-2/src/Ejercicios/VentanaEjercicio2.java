@@ -3,12 +3,15 @@ package Ejercicios;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 import javax.swing.DefaultComboBoxModel;
@@ -56,16 +59,15 @@ public class VentanaEjercicio2 extends JFrame{
 			getContentPane().add(lblNota3);
 		
 		JButton btnNuevo = new JButton("NUEVO");
-		btnNuevo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		btnNuevo.setBounds(329, 113, 117, 41);
 		getContentPane().add(btnNuevo);
 		
 		JButton btnSalir = new JButton("SALIR");
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
+				ventanaActual.dispose();
+				
 			}
 		});
 		btnSalir.setBounds(329, 165, 117, 41);
@@ -111,17 +113,49 @@ public class VentanaEjercicio2 extends JFrame{
 		txtCondicion.setBounds(118, 95, 100, 25);
 		p2.add(txtCondicion);
 		
-		
 		JButton btnCalcular = new JButton("CALCULAR");
 		btnCalcular.setBounds(329, 58, 117, 41);
 		getContentPane().add(btnCalcular);
-		btnCalcular.addActionListener(new EventoButtonCalcular(txtNota1, txtNota2, txtNota3, cbTPS, txtPromedio, txtCondicion));
+		
+		JLabel lblErrorFormatoNumber = new JLabel("");
+		lblErrorFormatoNumber.setBounds(58, 213, 180, 14);
+		panel1.add(lblErrorFormatoNumber);
+		lblErrorFormatoNumber.setForeground(Color.RED);
+		
+		btnCalcular.addActionListener(new EventoButtonCalcular(txtNota1, txtNota2, txtNota3, cbTPS, txtPromedio, txtCondicion,lblErrorFormatoNumber));
+		btnNuevo.addActionListener(new EventoButtonNuevo(txtNota1, txtNota2, txtNota3));
+		
 	}
 	
 	public void cambiarVisibilidad(Boolean estado) { 
 		setVisible(estado);
 	}
 }
+
+class EventoButtonNuevo implements ActionListener{
+		private JTextField txtNota1;
+		private JTextField txtNota2;
+		private JTextField txtNota3;
+		
+	    public EventoButtonNuevo(JTextField txtNota1, JTextField txtNota2, JTextField txtNota3) {
+	        this.txtNota1 = txtNota1;
+	        this.txtNota2 = txtNota2;
+	        this.txtNota3 = txtNota3;
+	    }
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			try {
+				txtNota1.setText("");
+				txtNota2.setText("");
+				txtNota3.setText("");
+			}
+			catch (NullPointerException npe) {
+			    System.out.println("Error exepcion nullpoint");
+			}
+		}
+		
+	}
 
 class EventoButtonCalcular implements ActionListener{
 
@@ -131,17 +165,21 @@ class EventoButtonCalcular implements ActionListener{
 	private JComboBox<String> cbTPS;
 	private JTextField txtPromedio;
 	private JTextField txtCondicion;
+	private JLabel lblErrorFormatoNumber;
 	
 	EventoButtonCalcular() {};
 
-	EventoButtonCalcular (JTextField n1, JTextField n2, JTextField n3, JComboBox<String> tp, JTextField prom, JTextField condicion){
+	EventoButtonCalcular (JTextField n1, JTextField n2, JTextField n3, JComboBox<String> tp, JTextField prom, JTextField condicion,JLabel lblErrorFormatoNumber){
 		txtNota1 = n1;
 		txtNota2 = n2;
 		txtNota3 = n3;
 		cbTPS = tp;
 		txtPromedio = prom;
 		txtCondicion = condicion;
+		this.lblErrorFormatoNumber=lblErrorFormatoNumber;
 	}
+	
+
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -157,10 +195,10 @@ class EventoButtonCalcular implements ActionListener{
 			float nota3 = Float.parseFloat(txtNota3.getText());
 			float promedio = (nota1 + nota2 + nota3)/3;
 			txtPromedio.setText(Float.toString(promedio));
+			lblErrorFormatoNumber.setText("");
 		}
 		catch (NumberFormatException enf) {
-			txtPromedio.setText("Error en el formato de numeros");
-			txtPromedio.setBackground(Color.red);
+			lblErrorFormatoNumber.setText("Ingrese numeros en las notas");
 		}
 	}
 }
