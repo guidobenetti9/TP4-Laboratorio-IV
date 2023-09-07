@@ -216,6 +216,26 @@ class EventoButtonCalcular implements ActionListener{
 		if(cbTPS.getSelectedIndex() == 1) {
 			txtCondicion.setText("Libre");
 		}
+		
+		///SEGUNDO ITEM => Si alguna de las tres notas del alumno es inferior a 6, la condición del alumno es
+		//libre independientemente de la nota del TP.
+		
+		else if(Float.parseFloat(txtNota1.getText())<6 || Float.parseFloat(txtNota2.getText())<6 || Float.parseFloat(txtNota3.getText())<6) {
+			txtCondicion.setText("Libre");
+		}
+		
+		////TERCER ITEM => Si la nota de los tres parciales es superior o igual a 8 y el TP se encuentra
+		//aprobado, entonces la condición es promocionado. 
+		
+		else if(Float.parseFloat(txtNota1.getText())>=8 && Float.parseFloat(txtNota2.getText())>=8 && Float.parseFloat(txtNota3.getText())>=8) {
+			if(cbTPS.getSelectedIndex() == 0) {
+			}
+			txtCondicion.setText("Promocionado");
+		}
+		
+		//CUARTO ITEM => Si los tres parciales se encuentran en el rango de notas entre 6 y 8 y el Tp se
+		//encuentra aprobado, entonces la condición es regular.
+		
 		///CALCULAR EL PROMEDIO:
 		try {
 			
