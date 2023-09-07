@@ -15,6 +15,8 @@ import java.awt.Component;
 import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class VentanaEjercicio2 extends JFrame{
 
@@ -32,16 +34,40 @@ public class VentanaEjercicio2 extends JFrame{
 		getContentPane().setLayout(null);
 		
 		txtNota1 = new JTextField();
+		txtNota1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				Color color = Color.white;
+				
+				txtNota1.setBackground(color);
+			}
+		});
 		txtNota1.setBounds(157, 66, 100, 25);
 		getContentPane().add(txtNota1);
 		txtNota1.setColumns(10);
 		
+		
 		txtNota2 = new JTextField();
+		txtNota2.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				Color color = Color.white;
+				
+				txtNota2.setBackground(color);
+			}
+		});
 		txtNota2.setColumns(10);
 		txtNota2.setBounds(157, 121, 100, 25);
 		getContentPane().add(txtNota2);
 		
 		txtNota3 = new JTextField();
+		txtNota3.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				Color color = Color.white;
+				txtNota3.setBackground(color);
+			}
+		});
 		txtNota3.setColumns(10);
 		txtNota3.setBounds(157, 173, 100, 25);
 		getContentPane().add(txtNota3);
@@ -184,19 +210,51 @@ class EventoButtonCalcular implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
+		Color colorRojo = Color.red;
+		
 		////PRIMER ITEM => SI EL TP ESTÁ DESAPROBADO, EL ALUMNO ESTÁ LIBRE.
 		if(cbTPS.getSelectedIndex() == 1) {
 			txtCondicion.setText("Libre");
 		}
 		///CALCULAR EL PROMEDIO:
 		try {
+			
+			int error = 0;
 			float nota1 = Float.parseFloat(txtNota1.getText());
 			float nota2 = Float.parseFloat(txtNota2.getText());
 			float nota3 = Float.parseFloat(txtNota3.getText());
-			float promedio = (nota1 + nota2 + nota3)/3;
-			txtPromedio.setText(Float.toString(promedio));
-			lblErrorFormatoNumber.setText("");
+			
+			if(nota1 < 1 || nota1 > 10) {
+				error++;
+				txtNota1.setBackground(colorRojo);
+				txtNota1.setText("");
+			}
+			
+		    if(nota2 < 1 || nota2 > 10) {
+				
+				error++;
+				txtNota2.setBackground(colorRojo);
+				txtNota2.setText("");
+			}
+			
+		    if(nota3 < 1 || nota3 > 10) {
+				error++;
+				txtNota3.setBackground(colorRojo);
+				txtNota3.setText("");
+			}
+				
+			if(error > 0) lblErrorFormatoNumber.setText("Ingrese notas válidas (1 al 10)");
+		
+			
+			if(error == 0)
+			{
+				float promedio = (nota1 + nota2 + nota3)/3;
+				txtPromedio.setText(Float.toString(promedio));
+				lblErrorFormatoNumber.setText("");
+			}
+			
 		}
+		
 		catch (NumberFormatException enf) {
 			lblErrorFormatoNumber.setText("Ingrese numeros en las notas");
 		}
