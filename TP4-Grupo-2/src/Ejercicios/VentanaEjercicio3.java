@@ -9,12 +9,13 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JCheckBox;
 import javax.swing.JTextField;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.ActionEvent;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.FlowLayout;
+
 
 public class VentanaEjercicio3 extends JFrame{
 
@@ -55,6 +56,11 @@ public class VentanaEjercicio3 extends JFrame{
 		rdbtnMac.setBounds(278, 17, 69, 23);
 		panel.add(rdbtnMac);
 		
+		ButtonGroup rdbtnGroup = new ButtonGroup();
+		rdbtnGroup.add(rdbtnWindows);
+		rdbtnGroup.add(rdbtnLinux);
+		rdbtnGroup.add(rdbtnMac);
+		
 		JCheckBox chckbxProgramacion = new JCheckBox("Programaci\u00F3n");
 		chckbxProgramacion.setBounds(219, 109, 133, 23);
 		getContentPane().add(chckbxProgramacion);
@@ -66,6 +72,10 @@ public class VentanaEjercicio3 extends JFrame{
 		JCheckBox chckbxDisenioGrafico = new JCheckBox("Dise\u00F1o gr\u00E1fico");
 		chckbxDisenioGrafico.setBounds(219, 161, 133, 23);
 		getContentPane().add(chckbxDisenioGrafico);
+		
+		chckbxProgramacion.addItemListener(new CambiarEstadoChBox(chckbxProgramacion,chckbxAdministracion,chckbxDisenioGrafico) );
+		chckbxAdministracion.addItemListener(new CambiarEstadoChBox(chckbxProgramacion,chckbxAdministracion,chckbxDisenioGrafico) );
+		chckbxDisenioGrafico.addItemListener(new CambiarEstadoChBox(chckbxProgramacion,chckbxAdministracion,chckbxDisenioGrafico) );
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -94,4 +104,41 @@ public class VentanaEjercicio3 extends JFrame{
 	public void cambiarVisibilidad(Boolean estado) { 
 		setVisible(estado);
 	}
+    
+	class CambiarEstadoChBox implements  ItemListener {
+		private JCheckBox chckbxProgramacion;
+		private JCheckBox chckbxAdministracion;
+		private JCheckBox chckbxDisenioGrafico;
+		
+		
+
+		public CambiarEstadoChBox(JCheckBox chckbxProgramacion, JCheckBox chckbxAdministracion,JCheckBox chckbxDisenioGrafico) {
+			this.chckbxProgramacion = chckbxProgramacion;
+			this.chckbxAdministracion = chckbxAdministracion;
+			this.chckbxDisenioGrafico = chckbxDisenioGrafico;
+		}
+
+
+
+		@Override
+		public void itemStateChanged(ItemEvent e) {
+			JCheckBox source = (JCheckBox) e.getSource();
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                // Desmarca los otros checkboxes cuando se selecciona uno
+                if (source == chckbxProgramacion) {
+                	chckbxAdministracion.setSelected(false);
+                	chckbxDisenioGrafico.setSelected(false);
+                } else if (source == chckbxAdministracion) {
+                	chckbxProgramacion.setSelected(false);
+                	chckbxDisenioGrafico.setSelected(false);
+                } else if (source == chckbxDisenioGrafico) {
+                	chckbxProgramacion.setSelected(false);
+                	chckbxAdministracion.setSelected(false);
+                }
+            }
+			
+		}
+		
+	}
+
 }

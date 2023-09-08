@@ -151,6 +151,7 @@ public class VentanaEjercicio2 extends JFrame{
 		btnCalcular.addActionListener(new EventoButtonCalcular(txtNota1, txtNota2, txtNota3, cbTPS, txtPromedio, txtCondicion,lblErrorFormatoNumber));
 		btnNuevo.addActionListener(new EventoButtonNuevo(txtNota1, txtNota2, txtNota3));
 		
+		
 	}
 	
 	public void cambiarVisibilidad(Boolean estado) { 
