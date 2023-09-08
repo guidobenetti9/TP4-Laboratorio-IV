@@ -236,6 +236,14 @@ class EventoButtonCalcular implements ActionListener{
 		
 		//CUARTO ITEM => Si los tres parciales se encuentran en el rango de notas entre 6 y 8 y el Tp se
 		//encuentra aprobado, entonces la condición es regular.
+		else if (Float.parseFloat(txtNota1.getText()) >= 6 && Float.parseFloat(txtNota1.getText()) <= 8 &&
+				Float.parseFloat(txtNota2.getText()) >= 6 && Float.parseFloat(txtNota2.getText()) <= 8 &&
+				Float.parseFloat(txtNota3.getText()) >= 6 && Float.parseFloat(txtNota3.getText()) <= 8 ) {
+			
+			txtCondicion.setText("Regular");
+			
+		}
+			
 		
 		///CALCULAR EL PROMEDIO:
 		try {
