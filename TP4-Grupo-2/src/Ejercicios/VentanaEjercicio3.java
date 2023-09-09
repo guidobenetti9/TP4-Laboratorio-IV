@@ -17,12 +17,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
 
 
 public class VentanaEjercicio3 extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	private JTextField txtCantHoras;
+
 
 	public VentanaEjercicio3() {
 		setTitle("Selecci\u00F3n m\u00FAltiple");
@@ -150,6 +152,7 @@ class EventoButtonAceptar implements ActionListener{
 	private ButtonGroup rdbtnGroup;
 	private JTextField txtCantHoras;
 
+
 	public EventoButtonAceptar(JCheckBox chckbxProgramacion, JCheckBox chckbxAdministracion,JCheckBox chckbxDisenioGrafico, 
 			JRadioButton rdbtnWindows, JRadioButton rdbtnLinux, JRadioButton rdbtnMac, ButtonGroup rdbtnGroup, JTextField txtCantHoras) {
 		this.chckbxProgramacion = chckbxProgramacion;
@@ -160,13 +163,26 @@ class EventoButtonAceptar implements ActionListener{
 		this.rdbtnMac = rdbtnMac;
 		this.rdbtnGroup = rdbtnGroup;
 		this.txtCantHoras = txtCantHoras;
+		
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (txtCantHoras.getText().isEmpty()) {
-			txtCantHoras.setText("0");
-		}
-		JOptionPane.showMessageDialog(null, (" - " + txtCantHoras.getText() + " Hs."));
+		
+	String especialidad = "";
+
+		
+	if (txtCantHoras.getText().isEmpty()) txtCantHoras.setText("0"); 
+	
+	if (chckbxProgramacion.isSelected()) especialidad = chckbxProgramacion.getText();
+	  else if (chckbxAdministracion.isSelected()) especialidad = chckbxAdministracion.getText();
+		 else  especialidad = chckbxDisenioGrafico.getText();
+					
+
+   
+		
+		JOptionPane.showMessageDialog(null, especialidad + " - " + txtCantHoras.getText() + " Hs.");
+		
+		
 	}
 }
