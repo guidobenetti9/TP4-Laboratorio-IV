@@ -3,6 +3,8 @@ package Ejercicios;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JRadioButton;
 import javax.swing.border.LineBorder;
@@ -99,46 +101,72 @@ public class VentanaEjercicio3 extends JFrame{
 		});
 		btnAceptar.setBounds(186, 283, 89, 29);
 		getContentPane().add(btnAceptar);
+		btnAceptar.addActionListener(new EventoButtonAceptar(chckbxProgramacion, chckbxAdministracion, chckbxDisenioGrafico, rdbtnWindows, rdbtnLinux, rdbtnMac, rdbtnGroup, txtCantHoras));
 	}
 	
 	public void cambiarVisibilidad(Boolean estado) { 
 		setVisible(estado);
 	}
+}
     
-	class CambiarEstadoChBox implements  ItemListener {
-		private JCheckBox chckbxProgramacion;
-		private JCheckBox chckbxAdministracion;
-		private JCheckBox chckbxDisenioGrafico;
-		
-		
+class CambiarEstadoChBox implements  ItemListener {
+	private JCheckBox chckbxProgramacion;
+	private JCheckBox chckbxAdministracion;
+	private JCheckBox chckbxDisenioGrafico;
 
-		public CambiarEstadoChBox(JCheckBox chckbxProgramacion, JCheckBox chckbxAdministracion,JCheckBox chckbxDisenioGrafico) {
-			this.chckbxProgramacion = chckbxProgramacion;
-			this.chckbxAdministracion = chckbxAdministracion;
-			this.chckbxDisenioGrafico = chckbxDisenioGrafico;
-		}
-
-
-
-		@Override
-		public void itemStateChanged(ItemEvent e) {
-			JCheckBox source = (JCheckBox) e.getSource();
-            if (e.getStateChange() == ItemEvent.SELECTED) {
-                // Desmarca los otros checkboxes cuando se selecciona uno
-                if (source == chckbxProgramacion) {
-                	chckbxAdministracion.setSelected(false);
-                	chckbxDisenioGrafico.setSelected(false);
-                } else if (source == chckbxAdministracion) {
-                	chckbxProgramacion.setSelected(false);
-                	chckbxDisenioGrafico.setSelected(false);
-                } else if (source == chckbxDisenioGrafico) {
-                	chckbxProgramacion.setSelected(false);
-                	chckbxAdministracion.setSelected(false);
-                }
-            }
-			
-		}
-		
+	public CambiarEstadoChBox(JCheckBox chckbxProgramacion, JCheckBox chckbxAdministracion,JCheckBox chckbxDisenioGrafico) {
+		this.chckbxProgramacion = chckbxProgramacion;
+		this.chckbxAdministracion = chckbxAdministracion;
+		this.chckbxDisenioGrafico = chckbxDisenioGrafico;
 	}
 
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		JCheckBox source = (JCheckBox) e.getSource();
+        if (e.getStateChange() == ItemEvent.SELECTED) {
+        // Desmarca los otros checkboxes cuando se selecciona uno
+        if (source == chckbxProgramacion) {
+        	chckbxAdministracion.setSelected(false);
+            chckbxDisenioGrafico.setSelected(false);
+        } else if (source == chckbxAdministracion) {
+        	chckbxProgramacion.setSelected(false);
+            chckbxDisenioGrafico.setSelected(false);
+        } else if (source == chckbxDisenioGrafico) {
+            chckbxProgramacion.setSelected(false);
+            chckbxAdministracion.setSelected(false);
+        }
+        }
+	}
+}
+
+class EventoButtonAceptar implements ActionListener{
+	
+	private JCheckBox chckbxProgramacion;
+	private JCheckBox chckbxAdministracion;
+	private JCheckBox chckbxDisenioGrafico;
+	private JRadioButton rdbtnWindows;
+	private JRadioButton rdbtnLinux;
+	private JRadioButton rdbtnMac;
+	private ButtonGroup rdbtnGroup;
+	private JTextField txtCantHoras;
+
+	public EventoButtonAceptar(JCheckBox chckbxProgramacion, JCheckBox chckbxAdministracion,JCheckBox chckbxDisenioGrafico, 
+			JRadioButton rdbtnWindows, JRadioButton rdbtnLinux, JRadioButton rdbtnMac, ButtonGroup rdbtnGroup, JTextField txtCantHoras) {
+		this.chckbxProgramacion = chckbxProgramacion;
+		this.chckbxAdministracion = chckbxAdministracion;
+		this.chckbxDisenioGrafico = chckbxDisenioGrafico;
+		this.rdbtnWindows = rdbtnWindows;
+		this.rdbtnLinux = rdbtnLinux;
+		this.rdbtnMac = rdbtnMac;
+		this.rdbtnGroup = rdbtnGroup;
+		this.txtCantHoras = txtCantHoras;
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (txtCantHoras.getText().isEmpty()) {
+			txtCantHoras.setText("0");
+		}
+		JOptionPane.showMessageDialog(null, (" - " + txtCantHoras.getText() + " Hs."));
+	}
 }

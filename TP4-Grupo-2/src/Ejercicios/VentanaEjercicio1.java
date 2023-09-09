@@ -8,6 +8,8 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class VentanaEjercicio1 extends JFrame{
 	
@@ -40,21 +42,53 @@ public class VentanaEjercicio1 extends JFrame{
 		getContentPane().add(lblFechaDeNacimiento);
 		
 		txtNombre = new JTextField();
+		txtNombre.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				Color color = Color.white;
+				
+				txtNombre.setBackground(color);
+			}
+		});
 		txtNombre.setBounds(169, 67, 195, 20);
 		getContentPane().add(txtNombre);
 		txtNombre.setColumns(10);
 		
 		txtApellido = new JTextField();
+		txtApellido.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				Color color = Color.white;
+				
+				txtApellido.setBackground(color);
+			}
+		});
 		txtApellido.setBounds(169, 92, 195, 20);
 		txtApellido.setColumns(10);
 		getContentPane().add(txtApellido);
 		
 		txtTelefono = new JTextField();
+		txtTelefono.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				Color color = Color.white;
+				
+				txtTelefono.setBackground(color);
+			}
+		});
 		txtTelefono.setBounds(169, 117, 195, 20);
 		txtTelefono.setColumns(10);
 		getContentPane().add(txtTelefono);
 		
 		txtFechaNac = new JTextField();
+		txtFechaNac.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				Color color = Color.white;
+				
+				txtFechaNac.setBackground(color);
+			}
+		});
 		txtFechaNac.setBounds(169, 143, 195, 20);
 		txtFechaNac.setColumns(10);
 		getContentPane().add(txtFechaNac);
@@ -77,7 +111,7 @@ public class VentanaEjercicio1 extends JFrame{
 	public void cambiarVisibilidad(Boolean estado) { 
 		setVisible(estado);
 	}
-
+}
 
 class EventoButtonMostrar implements ActionListener{
 		
@@ -90,75 +124,72 @@ class EventoButtonMostrar implements ActionListener{
 	public EventoButtonMostrar() {};
 	
 	public EventoButtonMostrar (JTextField txtN, JTextField txtA, JTextField txtT, JTextField txtFN, JLabel lblInfo) {
-			txtNombre = txtN;
-			txtApellido = txtA;
-			txtTelefono = txtT;
-			txtFechaNac = txtFN;
-			lblInformacion = lblInfo;
-		}
+		txtNombre = txtN;
+		txtApellido = txtA;
+		txtTelefono = txtT;
+		txtFechaNac = txtFN;
+		lblInformacion = lblInfo;
+	}
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			Color colorRojo = Color.RED;
-			Color colorBlanco = Color.WHITE;
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Color colorRojo = Color.RED;
+		Color colorBlanco = Color.WHITE;
 				
-			if(txtNombre.getText().isEmpty() || txtApellido.getText().isEmpty() || txtTelefono.getText().isEmpty() || txtFechaNac.getText().isEmpty()) {
+		if(txtNombre.getText().isEmpty() || txtApellido.getText().isEmpty() || txtTelefono.getText().isEmpty() || txtFechaNac.getText().isEmpty()) {
 				
-				if(txtNombre.getText().isEmpty()) {
-					txtNombre.setBackground(colorRojo);
-				}
-				else {
-					txtNombre.setBackground(colorBlanco);
-				}
-				
-				if(txtApellido.getText().isEmpty()) {
-					txtApellido.setBackground(colorRojo);
-				}
-				else {
-					txtApellido.setBackground(colorBlanco);
-				}
-				
-				if(txtTelefono.getText().isEmpty()) {
-					txtTelefono.setBackground(colorRojo);
-				}
-				else {
-					txtTelefono.setBackground(colorBlanco);
-				}
-				
-				if(txtFechaNac.getText().isEmpty()){
-					txtFechaNac.setBackground(colorRojo);
-				}
-				else {
-					txtFechaNac.setBackground(colorBlanco);
-				}
-	
-				lblInformacion.setText("");
+			if(txtNombre.getText().isEmpty()) {
+				txtNombre.setBackground(colorRojo);
 			}
 			else {
-				
-				//PONER FONDO BLANCO Y LIMPIAR LOS TXT
 				txtNombre.setBackground(colorBlanco);
-				txtApellido.setBackground(colorBlanco);
-				txtTelefono.setBackground(colorBlanco);
-				txtFechaNac.setBackground(colorBlanco);
-				
-				lblInformacion.setText(txtNombre.getText() + "  " + txtApellido.getText()  + "  "  + txtTelefono.getText()  + "  " +  txtFechaNac.getText());
-				lblInformacion.setVisible(true);	
-				txtNombre.setText("");
-				txtApellido.setText("");
-				txtTelefono.setText("");
-				txtFechaNac.setText("");
 			}
+			
+			if(txtApellido.getText().isEmpty()) {
+				txtApellido.setBackground(colorRojo);
+			}
+			else {
+				txtApellido.setBackground(colorBlanco);
+			}
+				
+			if(txtTelefono.getText().isEmpty()) {
+				txtTelefono.setBackground(colorRojo);
+			}
+			else {
+				txtTelefono.setBackground(colorBlanco);
+			}
+			
+			if(txtFechaNac.getText().isEmpty()){
+				txtFechaNac.setBackground(colorRojo);
+			}
+			else {
+				txtFechaNac.setBackground(colorBlanco);
+			}
+	
+			lblInformacion.setText("");
 		}
-		
-		public JLabel getLblInformacion() {
-			return lblInformacion;
-		}
-
-		public void setLblInformacion(JLabel lblInformacion) {
-			this.lblInformacion = lblInformacion;
+		else {
+				
+			//PONER FONDO BLANCO Y LIMPIAR LOS TXT
+			txtNombre.setBackground(colorBlanco);
+			txtApellido.setBackground(colorBlanco);
+			txtTelefono.setBackground(colorBlanco);
+			txtFechaNac.setBackground(colorBlanco);
+				
+			lblInformacion.setText(txtNombre.getText() + "  " + txtApellido.getText()  + "  "  + txtTelefono.getText()  + "  " +  txtFechaNac.getText());
+			lblInformacion.setVisible(true);	
+			txtNombre.setText("");
+			txtApellido.setText("");
+			txtTelefono.setText("");
+			txtFechaNac.setText("");
 		}
 	}
-}
+		
+	public JLabel getLblInformacion() {
+		return lblInformacion;
+	}
 
+	public void setLblInformacion(JLabel lblInformacion) {
+		this.lblInformacion = lblInformacion;
+	}
+}

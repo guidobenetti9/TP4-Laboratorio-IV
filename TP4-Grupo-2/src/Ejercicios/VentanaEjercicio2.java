@@ -150,8 +150,6 @@ public class VentanaEjercicio2 extends JFrame{
 		
 		btnCalcular.addActionListener(new EventoButtonCalcular(txtNota1, txtNota2, txtNota3, cbTPS, txtPromedio, txtCondicion,lblErrorFormatoNumber));
 		btnNuevo.addActionListener(new EventoButtonNuevo(txtNota1, txtNota2, txtNota3));
-		
-		
 	}
 	
 	public void cambiarVisibilidad(Boolean estado) { 
@@ -181,8 +179,7 @@ class EventoButtonNuevo implements ActionListener{
 			    System.out.println("Error exepcion nullpoint");
 			}
 		}
-		
-	}
+}
 
 class EventoButtonCalcular implements ActionListener{
 
@@ -206,48 +203,11 @@ class EventoButtonCalcular implements ActionListener{
 		this.lblErrorFormatoNumber=lblErrorFormatoNumber;
 	}
 	
-
-	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
 		Color colorRojo = Color.red;
 		
-		////PRIMER ITEM => SI EL TP ESTÁ DESAPROBADO, EL ALUMNO ESTÁ LIBRE.
-		if(cbTPS.getSelectedIndex() == 1) {
-			txtCondicion.setText("Libre");
-		}
-		
-		///SEGUNDO ITEM => Si alguna de las tres notas del alumno es inferior a 6, la condición del alumno es
-		//libre independientemente de la nota del TP.
-		
-		else if(Float.parseFloat(txtNota1.getText())<6 || Float.parseFloat(txtNota2.getText())<6 || Float.parseFloat(txtNota3.getText())<6) {
-			txtCondicion.setText("Libre");
-		}
-		
-		////TERCER ITEM => Si la nota de los tres parciales es superior o igual a 8 y el TP se encuentra
-		//aprobado, entonces la condición es promocionado. 
-		
-		else if(Float.parseFloat(txtNota1.getText())>=8 && Float.parseFloat(txtNota2.getText())>=8 && Float.parseFloat(txtNota3.getText())>=8) {
-			if(cbTPS.getSelectedIndex() == 0) {
-			}
-			txtCondicion.setText("Promocionado");
-		}
-		
-		//CUARTO ITEM => Si los tres parciales se encuentran en el rango de notas entre 6 y 8 y el Tp se
-		//encuentra aprobado, entonces la condición es regular.
-		else if (Float.parseFloat(txtNota1.getText()) >= 6 && Float.parseFloat(txtNota1.getText()) <= 8 &&
-				Float.parseFloat(txtNota2.getText()) >= 6 && Float.parseFloat(txtNota2.getText()) <= 8 &&
-				Float.parseFloat(txtNota3.getText()) >= 6 && Float.parseFloat(txtNota3.getText()) <= 8 ) {
-			
-			txtCondicion.setText("Regular");
-			
-		}
-			
-		
-		///CALCULAR EL PROMEDIO:
 		try {
-			
 			int error = 0;
 			float nota1 = Float.parseFloat(txtNota1.getText());
 			float nota2 = Float.parseFloat(txtNota2.getText());
@@ -274,7 +234,6 @@ class EventoButtonCalcular implements ActionListener{
 				
 			if(error > 0) lblErrorFormatoNumber.setText("Ingrese notas válidas (1 al 10)");
 		
-			
 			if(error == 0)
 			{
 				float promedio = (nota1 + nota2 + nota3)/3;
@@ -282,12 +241,36 @@ class EventoButtonCalcular implements ActionListener{
 				lblErrorFormatoNumber.setText("");
 			}
 			
+			////PRIMER ITEM => SI EL TP ESTÁ DESAPROBADO, EL ALUMNO ESTÁ LIBRE.
+			if(cbTPS.getSelectedIndex() == 1) {
+				txtCondicion.setText("Libre");
+			}
+			
+			///SEGUNDO ITEM => Si alguna de las tres notas del alumno es inferior a 6, la condición del alumno es
+			//libre independientemente de la nota del TP.
+			
+			else if(nota1<6 || nota2<6 || nota3<6) {
+				txtCondicion.setText("Libre");
+			}
+			
+			////TERCER ITEM => Si la nota de los tres parciales es superior o igual a 8 y el TP se encuentra
+			//aprobado, entonces la condición es promocionado. 
+			
+			else if(nota1>=8 && nota2>=8 && nota3>=8) {
+				if(cbTPS.getSelectedIndex() == 0) {
+				}
+				txtCondicion.setText("Promocionado");
+			}
+			
+			//CUARTO ITEM => Si los tres parciales se encuentran en el rango de notas entre 6 y 8 y el Tp se
+			//encuentra aprobado, entonces la condición es regular.
+			else if (nota1 >= 6 && nota1 <= 8 && nota2 >= 6 && nota2 <= 8 && nota3 >= 6 && nota3 <= 8 ) {
+				txtCondicion.setText("Regular");
+			}
+			
 		}
-		
 		catch (NumberFormatException enf) {
-			lblErrorFormatoNumber.setText("Ingrese numeros en las notas");
+			lblErrorFormatoNumber.setText("El formato de los numeros es incorrecto");
 		}
 	}
 }
-
-
