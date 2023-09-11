@@ -170,7 +170,7 @@ class EventoButtonAceptar implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		
 	String especialidad = "";
-
+	String sistemaOperativo = "";
 		
 	if (txtCantHoras.getText().isEmpty()) txtCantHoras.setText("0"); 
 	
@@ -178,10 +178,22 @@ class EventoButtonAceptar implements ActionListener{
 	  else if (chckbxAdministracion.isSelected()) especialidad = chckbxAdministracion.getText();
 		 else  especialidad = chckbxDisenioGrafico.getText();
 					
-
-   
+	if (rdbtnWindows.isSelected()) {
+	    // Código a ejecutar si rdbtnWindows está seleccionado
+		sistemaOperativo = "Windows";
+	} else if (rdbtnLinux.isSelected()) {
+	    // Código a ejecutar si rdbtnLinux está seleccionado		
+		sistemaOperativo = "Linux";
+	} else if (rdbtnMac.isSelected()) {
+	    // Código a ejecutar si rdbtnMac está seleccionado
+		sistemaOperativo = "MAC";
+	} else {
+	    // Código a ejecutar si ninguno de los botones está seleccionado
+		sistemaOperativo = "No fue seleccionado Sistema Operativo ";
+	}
 		
-		JOptionPane.showMessageDialog(null, especialidad + " - " + txtCantHoras.getText() + " Hs.");
+	String Mensaje = especialidad + " - " + sistemaOperativo + " - " + txtCantHoras.getText() + " Hs.";
+		JOptionPane.showMessageDialog(null, Mensaje);
 		
 		
 	}
