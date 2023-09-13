@@ -127,7 +127,7 @@ class CambiarEstadoChBox implements  ItemListener {
 		JCheckBox source = (JCheckBox) e.getSource();
         if (e.getStateChange() == ItemEvent.SELECTED) {
         // Desmarca los otros checkboxes cuando se selecciona uno
-        if (source == chckbxProgramacion) {
+        /*if (source == chckbxProgramacion) {
         	chckbxAdministracion.setSelected(false);
             chckbxDisenioGrafico.setSelected(false);
         } else if (source == chckbxAdministracion) {
@@ -136,7 +136,7 @@ class CambiarEstadoChBox implements  ItemListener {
         } else if (source == chckbxDisenioGrafico) {
             chckbxProgramacion.setSelected(false);
             chckbxAdministracion.setSelected(false);
-        }
+        }*/
         }
 	}
 }
@@ -174,10 +174,13 @@ class EventoButtonAceptar implements ActionListener{
 		
 	if (txtCantHoras.getText().isEmpty()) txtCantHoras.setText("0"); 
 	
-	if (chckbxProgramacion.isSelected()) especialidad = chckbxProgramacion.getText();
-	  else if (chckbxAdministracion.isSelected()) especialidad = chckbxAdministracion.getText();
-		 else  especialidad = chckbxDisenioGrafico.getText();
+	if (chckbxProgramacion.isSelected()) especialidad = chckbxProgramacion.getText() + " - ";
+	
+	if (chckbxAdministracion.isSelected()) especialidad += chckbxAdministracion.getText() + " - ";
+	
+	if (chckbxDisenioGrafico.isSelected())  especialidad += chckbxDisenioGrafico.getText() + " - ";
 					
+	
 	if (rdbtnWindows.isSelected()) {
 	    // Código a ejecutar si rdbtnWindows está seleccionado
 		sistemaOperativo = "Windows";
@@ -192,7 +195,7 @@ class EventoButtonAceptar implements ActionListener{
 		sistemaOperativo = "No fue seleccionado Sistema Operativo ";
 	}
 		
-	String Mensaje = especialidad + " - " + sistemaOperativo + " - " + txtCantHoras.getText() + " Hs.";
+	String Mensaje = especialidad + sistemaOperativo + " - " + txtCantHoras.getText() + " Hs.";
 		JOptionPane.showMessageDialog(null, Mensaje);
 		
 		
