@@ -149,7 +149,7 @@ public class VentanaEjercicio2 extends JFrame{
 		lblErrorFormatoNumber.setForeground(Color.RED);
 		
 		btnCalcular.addActionListener(new EventoButtonCalcular(txtNota1, txtNota2, txtNota3, cbTPS, txtPromedio, txtCondicion,lblErrorFormatoNumber));
-		btnNuevo.addActionListener(new EventoButtonNuevo(txtNota1, txtNota2, txtNota3));
+		btnNuevo.addActionListener(new EventoButtonNuevo(txtNota1, txtNota2, txtNota3, txtPromedio, txtCondicion));
 	}
 	
 	public void cambiarVisibilidad(Boolean estado) { 
@@ -161,11 +161,15 @@ class EventoButtonNuevo implements ActionListener{
 		private JTextField txtNota1;
 		private JTextField txtNota2;
 		private JTextField txtNota3;
+		private JTextField txtPromedio;
+		private JTextField txtCondicion;
 		
-	    public EventoButtonNuevo(JTextField txtNota1, JTextField txtNota2, JTextField txtNota3) {
+	    public EventoButtonNuevo(JTextField txtNota1, JTextField txtNota2, JTextField txtNota3, JTextField txtPromedio, JTextField txtCondicion) {
 	        this.txtNota1 = txtNota1;
 	        this.txtNota2 = txtNota2;
 	        this.txtNota3 = txtNota3;
+	        this.txtPromedio = txtPromedio;
+	        this.txtCondicion = txtCondicion;
 	    }
 
 		@Override
@@ -174,6 +178,9 @@ class EventoButtonNuevo implements ActionListener{
 				txtNota1.setText("");
 				txtNota2.setText("");
 				txtNota3.setText("");
+				txtPromedio.setText("");
+				txtCondicion.setText("");
+				
 			}
 			catch (NullPointerException npe) {
 			    System.out.println("Error exepcion nullpoint");

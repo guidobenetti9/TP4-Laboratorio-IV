@@ -183,13 +183,13 @@ class EventoButtonAceptar implements ActionListener{
 	
 	if (rdbtnWindows.isSelected()) {
 	    // Código a ejecutar si rdbtnWindows está seleccionado
-		sistemaOperativo = "Windows";
+		sistemaOperativo = rdbtnWindows.getText();
 	} else if (rdbtnLinux.isSelected()) {
 	    // Código a ejecutar si rdbtnLinux está seleccionado		
-		sistemaOperativo = "Linux";
+		sistemaOperativo = rdbtnLinux.getText();
 	} else if (rdbtnMac.isSelected()) {
 	    // Código a ejecutar si rdbtnMac está seleccionado
-		sistemaOperativo = "MAC";
+		sistemaOperativo = rdbtnMac.getText();
 	} else {
 	    // Código a ejecutar si ninguno de los botones está seleccionado
 		sistemaOperativo = "No fue seleccionado Sistema Operativo ";
