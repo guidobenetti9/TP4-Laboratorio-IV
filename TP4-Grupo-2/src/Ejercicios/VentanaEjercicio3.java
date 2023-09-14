@@ -14,10 +14,9 @@ import javax.swing.JTextField;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+/*import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;*/
 import java.awt.event.ActionEvent;
-import javax.swing.JComboBox;
 
 
 public class VentanaEjercicio3 extends JFrame{
@@ -29,7 +28,7 @@ public class VentanaEjercicio3 extends JFrame{
 	public VentanaEjercicio3() {
 		setTitle("Selecci\u00F3n m\u00FAltiple");
 		setBounds(600,400,535,362);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		
 		JLabel lblElijeUnSistema = new JLabel("Elije un sistema operativo");
@@ -77,9 +76,9 @@ public class VentanaEjercicio3 extends JFrame{
 		chckbxDisenioGrafico.setBounds(219, 161, 133, 23);
 		getContentPane().add(chckbxDisenioGrafico);
 		
-		chckbxProgramacion.addItemListener(new CambiarEstadoChBox(chckbxProgramacion,chckbxAdministracion,chckbxDisenioGrafico) );
-		chckbxAdministracion.addItemListener(new CambiarEstadoChBox(chckbxProgramacion,chckbxAdministracion,chckbxDisenioGrafico) );
-		chckbxDisenioGrafico.addItemListener(new CambiarEstadoChBox(chckbxProgramacion,chckbxAdministracion,chckbxDisenioGrafico) );
+		//chckbxProgramacion.addItemListener(new CambiarEstadoChBox(chckbxProgramacion,chckbxAdministracion,chckbxDisenioGrafico) );
+		//chckbxAdministracion.addItemListener(new CambiarEstadoChBox(chckbxProgramacion,chckbxAdministracion,chckbxDisenioGrafico) );
+		//chckbxDisenioGrafico.addItemListener(new CambiarEstadoChBox(chckbxProgramacion,chckbxAdministracion,chckbxDisenioGrafico) );
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -103,14 +102,15 @@ public class VentanaEjercicio3 extends JFrame{
 		});
 		btnAceptar.setBounds(186, 283, 89, 29);
 		getContentPane().add(btnAceptar);
-		btnAceptar.addActionListener(new EventoButtonAceptar(chckbxProgramacion, chckbxAdministracion, chckbxDisenioGrafico, rdbtnWindows, rdbtnLinux, rdbtnMac, rdbtnGroup, txtCantHoras));
+		btnAceptar.addActionListener(new EventoButtonAceptar(chckbxProgramacion, chckbxAdministracion, chckbxDisenioGrafico, rdbtnWindows, rdbtnLinux, rdbtnMac, txtCantHoras));
 	}
 	
 	public void cambiarVisibilidad(Boolean estado) { 
 		setVisible(estado);
 	}
 }
-    
+
+/*
 class CambiarEstadoChBox implements  ItemListener {
 	private JCheckBox chckbxProgramacion;
 	private JCheckBox chckbxAdministracion;
@@ -136,10 +136,11 @@ class CambiarEstadoChBox implements  ItemListener {
         } else if (source == chckbxDisenioGrafico) {
             chckbxProgramacion.setSelected(false);
             chckbxAdministracion.setSelected(false);
-        }*/
+        }
         }
 	}
 }
+*/
 
 class EventoButtonAceptar implements ActionListener{
 	
@@ -149,19 +150,17 @@ class EventoButtonAceptar implements ActionListener{
 	private JRadioButton rdbtnWindows;
 	private JRadioButton rdbtnLinux;
 	private JRadioButton rdbtnMac;
-	private ButtonGroup rdbtnGroup;
 	private JTextField txtCantHoras;
 
 
 	public EventoButtonAceptar(JCheckBox chckbxProgramacion, JCheckBox chckbxAdministracion,JCheckBox chckbxDisenioGrafico, 
-			JRadioButton rdbtnWindows, JRadioButton rdbtnLinux, JRadioButton rdbtnMac, ButtonGroup rdbtnGroup, JTextField txtCantHoras) {
+			JRadioButton rdbtnWindows, JRadioButton rdbtnLinux, JRadioButton rdbtnMac, JTextField txtCantHoras) {
 		this.chckbxProgramacion = chckbxProgramacion;
 		this.chckbxAdministracion = chckbxAdministracion;
 		this.chckbxDisenioGrafico = chckbxDisenioGrafico;
 		this.rdbtnWindows = rdbtnWindows;
 		this.rdbtnLinux = rdbtnLinux;
 		this.rdbtnMac = rdbtnMac;
-		this.rdbtnGroup = rdbtnGroup;
 		this.txtCantHoras = txtCantHoras;
 		
 	}
@@ -174,11 +173,20 @@ class EventoButtonAceptar implements ActionListener{
 		
 	if (txtCantHoras.getText().isEmpty()) txtCantHoras.setText("0"); 
 	
-	if (chckbxProgramacion.isSelected()) especialidad = chckbxProgramacion.getText() + " - ";
-	
-	if (chckbxAdministracion.isSelected()) especialidad += chckbxAdministracion.getText() + " - ";
-	
-	if (chckbxDisenioGrafico.isSelected())  especialidad += chckbxDisenioGrafico.getText() + " - ";
+	int cont = 0;
+	if (chckbxProgramacion.isSelected()) {
+		 especialidad = chckbxProgramacion.getText()  + " - "; 
+		 cont++;
+	}
+	if (chckbxAdministracion.isSelected()) {
+		especialidad += chckbxAdministracion.getText()  + " - ";
+		cont++;
+	}
+	if (chckbxDisenioGrafico.isSelected()) {
+		especialidad += chckbxDisenioGrafico.getText()  + " - ";
+		cont++;
+	}
+	if (cont == 0) especialidad = "No hay especialidad seleccionada - ";
 					
 	
 	if (rdbtnWindows.isSelected()) {
@@ -192,12 +200,13 @@ class EventoButtonAceptar implements ActionListener{
 		sistemaOperativo = rdbtnMac.getText();
 	} else {
 	    // Código a ejecutar si ninguno de los botones está seleccionado
-		sistemaOperativo = "No fue seleccionado Sistema Operativo ";
+		sistemaOperativo = "No fue seleccionado un sistema operativo";
 	}
 		
-	String Mensaje = especialidad + sistemaOperativo + " - " + txtCantHoras.getText() + " Hs.";
+	String Mensaje = sistemaOperativo + " - " + especialidad + txtCantHoras.getText() + " Hs.";
 		JOptionPane.showMessageDialog(null, Mensaje);
 		
-		
+	//limpiar
+	txtCantHoras.setText("");
 	}
 }

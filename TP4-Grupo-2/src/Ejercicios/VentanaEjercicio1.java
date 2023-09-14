@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -23,6 +24,7 @@ public class VentanaEjercicio1 extends JFrame{
 	public VentanaEjercicio1() {
 		setTitle("Contactos");
 		setBounds(50,400,505,337);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		
 		JLabel lblNombre = new JLabel("Nombre");
@@ -123,6 +125,21 @@ class EventoButtonMostrar implements ActionListener{
 	
 	public EventoButtonMostrar() {};
 	
+	//Metodos 
+	public static Boolean verificarTextoValido(String campo) {
+		if(!campo.matches("[0-9]+")) {
+			return true;
+		}
+		else return false;
+	}
+	
+	public static Boolean verificarFechaValida(String campo) {
+		if(campo.matches("^([0-2][0-9]|3[0-1])(\\/|-)(0[1-9]|1[0-2])\\2(\\d{4})$")) {
+			return true;
+		}
+		else return false;
+	}
+	
 	public EventoButtonMostrar (JTextField txtN, JTextField txtA, JTextField txtT, JTextField txtFN, JLabel lblInfo) {
 		txtNombre = txtN;
 		txtApellido = txtA;
@@ -169,19 +186,38 @@ class EventoButtonMostrar implements ActionListener{
 			lblInformacion.setText("");
 		}
 		else {
-				
-			//PONER FONDO BLANCO Y LIMPIAR LOS TXT
 			txtNombre.setBackground(colorBlanco);
 			txtApellido.setBackground(colorBlanco);
 			txtTelefono.setBackground(colorBlanco);
 			txtFechaNac.setBackground(colorBlanco);
+			String mensaje = "";
+			lblInformacion.setVisible(true);
+			lblInformacion.setForeground(Color.RED);
+			if (verificarTextoValido(txtNombre.getText())) {
+				mensaje = txtNombre.getText() + " ";
 				
-			lblInformacion.setText(txtNombre.getText() + "  " + txtApellido.getText()  + "  "  + txtTelefono.getText()  + "  " +  txtFechaNac.getText());
-			lblInformacion.setVisible(true);	
-			txtNombre.setText("");
-			txtApellido.setText("");
-			txtTelefono.setText("");
-			txtFechaNac.setText("");
+				if (verificarTextoValido(txtApellido.getText())) {
+					mensaje += txtApellido.getText() + " ";
+					
+					if (!verificarTextoValido(txtTelefono.getText())) {
+						mensaje += txtTelefono.getText() + " ";
+						
+						if(verificarFechaValida(txtFechaNac.getText())) {
+							mensaje += txtFechaNac.getText() + " ";
+							lblInformacion.setForeground(Color.black);
+							lblInformacion.setText(mensaje);
+							txtNombre.setText("");
+							txtApellido.setText("");
+							txtTelefono.setText("");
+							txtFechaNac.setText("");
+						}
+						else lblInformacion.setText("La fecha debe tener el formato dd/mm/aaaa");
+					}
+					else lblInformacion.setText("El telefono debe contener solo numeros");
+				}
+				else lblInformacion.setText("El apellido debe contener solo letras");
+			}
+			else lblInformacion.setText("El nombre debe contener solo letras");
 		}
 	}
 		

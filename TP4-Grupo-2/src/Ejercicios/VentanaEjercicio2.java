@@ -30,7 +30,7 @@ public class VentanaEjercicio2 extends JFrame{
 	public VentanaEjercicio2() {
 		setTitle("Promedio");
 		setBounds(600,50,531,513);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		
 		txtNota1 = new JTextField();

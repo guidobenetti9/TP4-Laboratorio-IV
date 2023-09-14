@@ -17,7 +17,7 @@ public class Ventana extends JFrame{
 	public Ventana() {
 		
 		setBounds(50,50,500,300);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setTitle("TP 4 - Grupo 2");
 		getContentPane().setLayout(null);
 		
